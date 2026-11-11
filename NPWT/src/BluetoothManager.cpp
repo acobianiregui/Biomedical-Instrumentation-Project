@@ -41,7 +41,7 @@ void BluetoothManager :: sendData(
     float p1, float p2, float flow, float moisture, float r, float g, float b){
         
     if (!isConnected() || dataCharacteristic == nullptr) {
-        return; // Not connected or characteristic not initialized
+        return; 
     }
     //Store in array of 32 floats
     float data[7]= {p1, p2, flow, moisture, r, g, b};
@@ -57,7 +57,7 @@ void BluetoothManager :: sendData(
 //For debugging
 void BluetoothManager :: sendString(const std::string& message) {
     if (!isConnected() || dataCharacteristic == nullptr) {
-        return; // Not connected or characteristic not initialized
+        return; 
     }
     // Send string data to characteristic
     dataCharacteristic->setValue(message);

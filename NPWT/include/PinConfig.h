@@ -8,10 +8,17 @@
 
 //IMPORTANT TO UPDATE IN CASE OF PIN CHANGES !!!!!!!!!!!!!!!!!
 
+/* Important considerations:
+        - Pressure sensors 1 and 2 have the same I2C address so unless we use multiplexer they have to be on different busses.
+
+*/
 namespace Pins {
-    //I2C pins for pressure sensor and color
-    constexpr uint8_t I2C_SDA = A4;
-    constexpr uint8_t I2C_SCL = A5;
+    //I2C Bus 0 (for p1 and color sensor)
+    constexpr uint8_t I2C0_SDA = A4;
+    constexpr uint8_t I2C0_SCL = A5;
+    //I2C Bus 1 (for p2)
+    constexpr uint8_t I2C1_SDA = D2;
+    constexpr uint8_t I2C1_SCL = D3;
     //Flow sensor
     constexpr uint8_t FLOW=A0; //Flow sensor pin
     //Moisture sensor

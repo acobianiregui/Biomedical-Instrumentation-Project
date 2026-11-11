@@ -1,4 +1,6 @@
 #include <Arduino.h>
+#include <Wire.h>
+
 //Pin configuration
 #include "PinConfig.h"
 //Include drivers made for the project
@@ -19,19 +21,19 @@ uint16_t ts=500; //sampling period, in milliseconds
 
 
 void setup() {
-  //Setup configurations
+  //Setup configurations (see PinConfig.h for clarification)
   Serial.begin(115200); //Set bit rate for transmission
   bluetooth.begin();
   //Set pin modes
   //Sensors
   pinMode(Pins::FLOW, INPUT);
   pinMode(Pins::MOISTURE, INPUT);
-  //I2C includes pressure sensors and color sensor
-  pinMode(Pins::I2C_SDA, INPUT); 
-  pinMode(Pins::I2C_SCL, INPUT);
   //Actuators
   pinMode(Pins::PUMP, OUTPUT); 
   pinMode(Pins::BUZZER, OUTPUT); 
+  //I2C buses
+  Wire.begin(Pins::I2C0_SDA, Pins::I2C0_SCL);
+  Wire1.begin(Pins::I2C1_SDA, Pins::I2C1_SCL);
 
 }
 
