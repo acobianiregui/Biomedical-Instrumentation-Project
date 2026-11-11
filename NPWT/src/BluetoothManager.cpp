@@ -1,4 +1,5 @@
 #include "BluetoothManager.h"
+#include <string>
 
 //ESP32 uses LBE bluetooth instead of traditional bluetooth
 //in the BLE architechture, the esp32 acts like a server and advertises itself by broadcasting
@@ -10,7 +11,7 @@
 #define SERVICE_UUID "12345678-1234-1234-1234-123456789abc"
 #define DATA_UUID    "87654321-4321-4321-4321-cba987654321"
 
-void BluetoohManager:: begin(){
+void BluetoothManager:: begin(){
     //Initialize 
     NimBLEDevice :: init("NPWT_device"); //Public name in bluetooth
     //Create Server
@@ -32,11 +33,11 @@ void BluetoohManager:: begin(){
     advertising->start();
 }
 
-bool BluetoohManager::isConnected(){
+bool BluetoothManager::isConnected(){
     return server != nullptr && server->getConnectedCount() > 0;
 }
 
-void BluetoohManager:: sendData(
+void BluetoothManager :: sendData(
     float p1, float p2, float flow, float moisture, float r, float g, float b){
         
     if (!isConnected() || dataCharacteristic == nullptr) {
@@ -51,5 +52,15 @@ void BluetoohManager:: sendData(
     );
 
     //Notify clients of new data
+    dataCharacteristic->notify();
+}
+//For debugging
+void BluetoothManager :: sendString(const std::string& message) {
+    if (!isConnected() || dataCharacteristic == nullptr) {
+        return; // Not connected or characteristic not initialized
+    }
+    // Send string data to characteristic
+    dataCharacteristic->setValue(message);
+    // Notify clients of new data
     dataCharacteristic->notify();
 }
