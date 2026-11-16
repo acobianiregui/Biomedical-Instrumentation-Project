@@ -42,13 +42,16 @@ void loop() {
   
   if (millis()-last_update>=ts){ //Sampling 
       //Read sensors
-
+      bluetooth.sendString("Cycle...");
+      Serial.println("Reading sensors...");
       //PID calculation
       //Update actuators
       //Send info
+      last_update=millis(); //Update time
   }
+  
 
-  last_update=millis(); //Update time
+  
 }
 
 //Main functions below...
