@@ -6,13 +6,16 @@
 //Include drivers made for the project
 #include "BluetoothManager.h"
 #include "PIDController.h"
+#include "BuzzerDriver.h"
+#include "MoistureSensorDriver.h"
 
 //////////////////// DECLARE OBJECTS HERE ! //////////////////////////////////////////
 //PIDController object with params
 PIDController pid(1.0f,1.0f,1.0f); //change based on trials
 //Bluetooth manager class
 BluetoothManager bluetooth;
-
+BuzzerDriver buzzer;
+MoistureSensorDriver moistureSensor;
 
 ///////////Set global variables///////////////////////////////////////////////////
 float target_pressure= -125.0f; //differential pressure desired
@@ -27,13 +30,14 @@ void setup() {
   //Set pin modes
   //Sensors
   pinMode(Pins::FLOW, INPUT);
-  pinMode(Pins::MOISTURE, INPUT);
+  moistureSensor.init(Pins::MOISTURE, 0, 1023); // IMPORTANT TO CALIBRATE AND INTRODUCE DRY AND WET VALUES FOR MOISTURE SENSOR
   //Actuators
   pinMode(Pins::PUMP, OUTPUT); 
-  pinMode(Pins::BUZZER, OUTPUT); 
+  buzzer.init(Pins::BUZZER);
   //I2C buses
   Wire.begin(Pins::I2C0_SDA, Pins::I2C0_SCL);
   Wire1.begin(Pins::I2C1_SDA, Pins::I2C1_SCL);
+  
 
 }
 
