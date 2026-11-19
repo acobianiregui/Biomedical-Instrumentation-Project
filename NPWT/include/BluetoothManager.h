@@ -14,7 +14,7 @@ class BluetoothManager{
         void sendData(float p1, float p2, float flow, float moisture, float r, float g, float b); 
         //r,g,b refers to rgb from color sensor
         bool isConnected(); //Check status of connection
-        void sendString(const std::string& message); //mainly for debugging
+        void sendString(const std::string& message); //mainly for debugging 
     private:
         NimBLEServer* server= nullptr;
         NimBLECharacteristic* dataCharacteristic= nullptr;
