@@ -27,6 +27,7 @@ float MoistureSensorDriver::readMoisture(){
     }
     currentMoisture=100*(float)(rawValue-dryValue)/(wetValue-dryValue); 
     currentMoisture=constrain(currentMoisture, 0.0f, 100.0f); //Make sure its capped
+    Serial.println(currentMoisture);
     return currentMoisture;
 }
 

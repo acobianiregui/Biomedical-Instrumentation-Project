@@ -11,8 +11,8 @@ class MoistureSensorDriver{
 
     private:
         int moisturePin;
-        int dryValue=0; 
-        int wetValue=0;
+        int dryValue=620; 
+        int wetValue=175;
         int saturationThreshold=80;
         float currentMoisture=NAN; 
 };

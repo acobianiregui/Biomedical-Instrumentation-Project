@@ -14,6 +14,7 @@ void BuzzerDriver::playTone(int frequency, int duration) {
     toneStartTime = millis();
     toneDuration = duration;
     isPlaying = true;
+    Serial.println("Playing tone: " + String(frequency) + "Hz for " + String(duration) + "ms");
 }
 
 void BuzzerDriver::stopTone() {

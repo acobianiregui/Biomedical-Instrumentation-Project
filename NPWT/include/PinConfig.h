@@ -14,18 +14,19 @@
 */
 namespace Pins {
     //I2C Bus 0 (for p1 and color sensor)
-    constexpr uint8_t I2C0_SDA = A4;
-    constexpr uint8_t I2C0_SCL = A5;
+    constexpr uint8_t I2C0_SDA = A4;//21;
+    constexpr uint8_t I2C0_SCL = A5;//22;
     //I2C Bus 1 (for p2)
-    constexpr uint8_t I2C1_SDA = D2;
-    constexpr uint8_t I2C1_SCL = D3;
-    //Flow sensor
-    constexpr uint8_t FLOW=A0; //Flow sensor pin
+    constexpr uint8_t I2C1_SDA = D2;//18;
+    constexpr uint8_t I2C1_SCL = D3;//19;
     //Moisture sensor
-    constexpr uint8_t MOISTURE=A1; //Moisture sensor pin
+    constexpr uint8_t MOISTURE=A1;//4; //Moisture sensor pin
     //Pump control
-    constexpr uint8_t PUMP=D5; //Pump control pin
+    constexpr uint8_t PUMP=D5;//D5; //Pump control pin
     //Buzzer
-    constexpr uint8_t BUZZER=D6; //Buzzer pin
+    constexpr uint8_t BUZZER=D6;//D6; //Buzzer pin
+    //HX711 pins
+    constexpr uint8_t HX711_DOUT=D7;//D7; //HX711 data
+    constexpr uint8_t HX711_SCK=D8;//D8; //HX711 clock
 
 }
