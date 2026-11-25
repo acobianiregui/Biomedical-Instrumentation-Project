@@ -1,6 +1,5 @@
 #include "PressureSensorDriver.h"
 
-//For 
 namespace {
     constexpr uint32_t OUTPUT_MIN_COUNTS = 1677722UL;
     constexpr uint32_t OUTPUT_MAX_COUNTS = 15099494UL;

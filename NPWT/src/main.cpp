@@ -11,6 +11,7 @@
 #include "PressureSensorDriver.h"
 #include "PumpDriver.h"
 #include "HX711Driver.h"
+#include "ColorSensorDriver.h"
 
 //////////////////// DECLARE OBJECTS HERE ! //////////////////////////////////////////
 //PIDController object with params
@@ -19,9 +20,11 @@ PIDController pid(-0.4f,-0.05f,-0.01f); //change based on trials
 BluetoothManager bluetooth;
 BuzzerDriver buzzer;
 MoistureSensorDriver moistureSensor;
-PressureSensorDriver pressure1(Wire, 0.0f, 1.0f, 0x28); PressureSensorDriver pressure2(Wire1, 0.0f, 1.0f, 0x28);
+PressureSensorDriver pressure1(Wire, 0.0f, 1.0f, 0x28); 
+PressureSensorDriver pressure2(Wire1, 0.0f, 1.0f, 0x28);
 PumpDriver pump;
 HX711Driver hx711(Pins::HX711_DOUT, Pins::HX711_SCK);
+ColorSensorDriver color(Wire1,0x29);
 
 
 
@@ -55,32 +58,32 @@ void setup() {
   //Set atmospheric pressure
   pressure1.readPressureMmHg(atmospheric_pressure);
 
+  //load cell
+  hx711.setCalibrationFactor(1.0f);
+  hx711.tare();
   
 }
 bool pepe=false;
 //Main code here
 void loop() {
   float p1;
-  bool ok=pressure1.readPressureMmHg(p1);
-  Serial.println(ok);
-   Serial.println(p1); 
+  bool ok=pressure1.readPressureMmHg(p1); 
   buzzer.update();
   if (millis()-last_update>=ts){ //Sampling 
       //Read sensors
       bluetooth.sendString("Cycle...");
       //Serial.println("Reading sensors...");
       //PID calculation
-      pump_speed=pid.calculate_correction(620.0f, p1, ts/1000.0f);
-      Serial.println("Current speed"); 
-      Serial.println(pump_speed);
-      pump.setPumpSpeed(pump_speed);
+      //pump_speed=pid.calculate_correction(620.0f, p1, ts/1000.0f);
+      //Serial.println("Current speed"); 
+      //Serial.println(pump_speed);
+      //pump.setPumpSpeed(pump_speed);
       //Update actuators
       //Send info
       //moistureSensor.readMoisture();
       last_update=millis(); //Update time
   }
   
-
   
 }
 
